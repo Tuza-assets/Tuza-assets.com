@@ -1,5 +1,12 @@
 version: 1.0
-
+project:
+  name: Tuza-assets
+  type: php
+  php_version: "8.2"
+runtime:
+  php:
+    version: "8.2"
+    enabled: true
 deploy:
   # configuration part, which is taken at the FIRST deployment of each branch
   bootstrap:
@@ -17,11 +24,9 @@ deploy:
       - chmod -R o+w storage bootstrap/cache
       - php artisan migrate --force
       - php artisan optimize:clear
-      - php artisan migrate --force -n
       - php artisan storage:link
       - php artisan optimize
       - php artisan up
-
   # configuration part, which is taken at ALL FURTHER deployments of this branch
   recurring:
     # folders that are not copied to IONOS webspace
@@ -42,13 +47,11 @@ deploy:
       - chmod -R o+w storage bootstrap/cache
       - php artisan migrate --force
       - php artisan optimize:clear
-      - php artisan migrate --force -n
       - php artisan storage:link
       - php artisan optimize
       - php artisan up
-
-# uncomment the following lines to configure cron jobs
-#runtime:
-#  cron-jobs:
-#    - command: my-cron-job-command # the deployment is located at $HOME/htdocs/ to execute a deployed script just prefix it accordingly
-#      schedule: 0 5 * * * # run every day at 5:00
+# Cron jobs for Laravel scheduler
+runtime:
+  cron-jobs:
+    - command: "cd $HOME/htdocs && php artisan schedule:run"
+      schedule: "* * * * *"  # Every minute for Laravel scheduler
