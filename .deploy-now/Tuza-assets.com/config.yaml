@@ -1,4 +1,12 @@
 version: 1.0
+project:
+  name: Tuza-assets
+  type: php
+  php_version: "8.3"
+runtime:
+  php:
+    version: "8.3"
+    enabled: true
 
 deploy:
   # configuration part, which is taken at the FIRST deployment of each branch
