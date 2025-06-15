@@ -3,21 +3,21 @@ project:
   name: Tuza-assets
   type: php
   php_version: "8.3"
+
 runtime:
   php:
     version: "8.3"
     enabled: true
+  cron-jobs: []
+
 deploy:
-  # configuration part, which is taken at the FIRST deployment of each branch
   bootstrap:
-    # folders that are not copied to IONOS webspace
     excludes:
       - tests
       - node_modules
       - DOCKER_ENV
       - docker_tag
       - output.log
-    # commands that are executed at the real webspace NOT at build servers AFTER copying new files
     post-deployment-remote-commands:
       - find $(pwd) -type f -not -path "$(pwd)/logs/*" -exec chmod 664 {} \;
       - find $(pwd) -type d -not -name "logs" -exec chmod 775 {} \;
@@ -28,9 +28,8 @@ deploy:
       - php artisan storage:link
       - php artisan optimize
       - php artisan up
-  # configuration part, which is taken at ALL FURTHER deployments of this branch
+
   recurring:
-    # folders that are not copied to IONOS webspace
     excludes:
       - tests
       - node_modules
@@ -38,10 +37,8 @@ deploy:
       - docker_tag
       - output.log
       - storage
-    # commands that are executed at the real webspace NOT at build servers BEFORE copying new files
     pre-deployment-remote-commands:
       - php artisan down
-    # commands that are executed at the real webspace NOT at build servers AFTER copying new files
     post-deployment-remote-commands:
       - find $(pwd) -type f -not -path "$(pwd)/logs/*" -exec chmod 664 {} \;
       - find $(pwd) -type d -not -name "logs" -exec chmod 775 {} \;
@@ -52,6 +49,3 @@ deploy:
       - php artisan storage:link
       - php artisan optimize
       - php artisan up
-# Cron jobs section removed - uncomment and configure if needed
-runtime:
-  cron-jobs: []
