@@ -11,9 +11,7 @@ runtime:
     enabled: true
 
 # FIX: Add cron-jobs with Laravel scheduler
-cron-jobs:
-  - command: "php artisan schedule:run"
-    schedule: "* * * * *"
+cron-jobs: []
 
 deploy:
   bootstrap:
