@@ -52,6 +52,13 @@ jobs:
 #          MY_SECRET_ENV_VAR: ${{ secrets.MY_SECRET }} # here you can find information how to create secrets: https://docs.github.com/en/actions/security-guides/encrypted-secrets
         run: composer install --optimize-autoloader --no-dev
 
+      - name: Build PHP assets
+# uncomment the following lines if you want to add environment variables for this step
+#        env:
+#          MY_ENV_VAR: value-for-my-env-var
+#          MY_SECRET_ENV_VAR: ${{ secrets.MY_SECRET }} # here you can find information how to create secrets: https://docs.github.com/en/actions/security-guides/encrypted-secrets
+        run: php artisan key:generate --force -n
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -71,7 +78,7 @@ jobs:
         with:
           api-key: ${{ secrets.IONOS_API_KEY }}
           service-host: api-eu.ionos.space
-          project-id: ce652f28-c000-45b6-b7e0-886c47c4c32e
+          project-id: 361456a9-7cf1-4c54-93ff-5c9cfcb5a734
           branch-id: ${{ inputs.branch-id }}
           version: ${{ github.sha }}
           folder: ${{ env.DEPLOYMENT_FOLDER }}
