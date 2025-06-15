@@ -10,11 +10,12 @@ runtime:
     version: "8.2"
     enabled: true
 
-# Add cron-jobs as an empty list if you don't need any cron jobs
-cron-jobs: []
+# FIX: Add cron-jobs with Laravel scheduler
+cron-jobs:
+  - command: "php artisan schedule:run"
+    schedule: "* * * * *"
 
 deploy:
-  # configuration part, which is taken at the FIRST deployment of each branch
   bootstrap:
     excludes:
       - tests
@@ -32,7 +33,6 @@ deploy:
       - php artisan optimize
       - php artisan up
 
-  # configuration part, which is taken at ALL FURTHER deployments of this branch
   recurring:
     excludes:
       - tests
