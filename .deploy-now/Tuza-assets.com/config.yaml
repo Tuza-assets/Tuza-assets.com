@@ -7,7 +7,6 @@ runtime:
   php:
     version: "8.3"
     enabled: true
-
 deploy:
   # configuration part, which is taken at the FIRST deployment of each branch
   bootstrap:
@@ -29,7 +28,6 @@ deploy:
       - php artisan storage:link
       - php artisan optimize
       - php artisan up
-
   # configuration part, which is taken at ALL FURTHER deployments of this branch
   recurring:
     # folders that are not copied to IONOS webspace
@@ -54,9 +52,6 @@ deploy:
       - php artisan storage:link
       - php artisan optimize
       - php artisan up
-
-# uncomment the following lines to configure cron jobs
+# Cron jobs section removed - uncomment and configure if needed
 runtime:
-  cron-jobs:
-    - command: "cd $HOME/htdocs && php artisan schedule:run"
-      schedule: "* * * * *"  # Every minute for Laravel scheduler
+  cron-jobs: []
