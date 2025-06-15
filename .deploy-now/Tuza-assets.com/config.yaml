@@ -10,6 +10,9 @@ runtime:
     version: "8.2"
     enabled: true
 
+# Add cron-jobs as an empty list if you don't need any cron jobs
+cron-jobs: []
+
 deploy:
   # configuration part, which is taken at the FIRST deployment of each branch
   bootstrap:
