@@ -9,7 +9,7 @@ runtime:
   php:
     version: "8.3"
     enabled: true
-  cron-jobs: []
+  cron-jobs:
 
 deploy:
   bootstrap:
