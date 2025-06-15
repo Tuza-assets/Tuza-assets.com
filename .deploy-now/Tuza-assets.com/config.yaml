@@ -9,9 +9,6 @@ runtime:
   php:
     version: "8.2"
     enabled: true
-  cron-jobs:
-    - command: "cd $HOME/htdocs && php artisan schedule:run"
-      schedule: "* * * * *" # Every minute for Laravel scheduler
 
 deploy:
   # configuration part, which is taken at the FIRST deployment of each branch
